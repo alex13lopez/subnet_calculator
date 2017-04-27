@@ -2,7 +2,7 @@
 # Copyright (C) 2017 ArenGamerZ
 
 import sys, re
-import colors as c
+from . import colors as c
 
 
 def check(ip):

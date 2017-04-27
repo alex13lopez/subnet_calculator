@@ -4,7 +4,7 @@
 # Copyright (C) 2017 ArenGamerZ
 
 import sys
-import bin_converter as bconverter
+from . import bin_converter as bconverter
 
 def Count(string, character):
     """ This function counts how many ocurrences of 'character' are in 'string' """
@@ -54,9 +54,16 @@ def DetClass(ip):
     return dclass, dmask
 
 
-def NumOfHosts(ip, masc):
-    dclass, dmask = DetClass(ip)
-    if bconverter.check(masc):
-        # Continue here
-        pass
-    #return result
+def NumOfHosts(mask):
+    if bconverter.check(mask):
+        NumOfZeroesMask = Count(bconverter.convert(mask), "0")
+        result = 2**NumOfZeroesMask
+    else:
+        try:
+            # We assume the mask was given in number format, eg: 26
+            # 32 is the maximum number of ones with 4 bytes (because 8*4 = 32)
+            NumOfZeroesMask = 32 - int(mask)
+            result = 2**NumOfZeroesMask
+        except ValueError:
+            return "That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"
+    return result
