@@ -56,7 +56,7 @@ def convert(ip, format="decimal"):
                         number = number/2
                     return ''.join(result)
             except ValueError:
-                return c.fcolors.RED+"That is not a valid IP address nor a number!!!"
+                return print(c.fcolors.RED+"That is not a valid IP address nor a number!!!"+c.fcolors.RESET)
     elif format == "binary":
         if check(ip):
             for group in ip.split('.'):
@@ -66,7 +66,7 @@ def convert(ip, format="decimal"):
             try:
                 return str(int(ip, 2))
             except ValueError:
-                return c.fcolors.RED+"That is not a valid IP address nor a number!!!"
+                return print(c.fcolors.RED+"That is not a valid IP address nor a number!!!"+c.fcolors.RESET)
 
 
 # If it is not the main process (e.g.: imported), the program will not seek for parameters

@@ -4,6 +4,7 @@
 # Copyright (C) 2017 ArenGamerZ
 
 import sys
+from . import colors as c
 from . import bin_converter as bconverter
 
 def Count(string, character):
@@ -57,7 +58,7 @@ def DetClass(ip):
 def NumOfHosts(mask):
     if bconverter.check(mask):
         NumOfZeroesMask = Count(bconverter.convert(mask), "0")
-        result = 2**NumOfZeroesMask
+        result = 2**NumOfZeroesMask-2
     else:
         try:
             # We assume the mask was given in number format, eg: 26
@@ -65,5 +66,66 @@ def NumOfHosts(mask):
             NumOfZeroesMask = 32 - int(mask)
             result = 2**NumOfZeroesMask
         except ValueError:
-            return "That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"
+            return print(c.fcolors.RED+"That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"+c.fcolors.RESET)
     return result
+
+
+def NumOfSubnets(ip, mask):
+    dmask = DetClass(ip)[1]
+    if bconverter.check(mask):
+        diff = Count(bconverter.convert(mask), "1") - Count(bconverter.convert(dmask), "1")
+        result = 2**diff
+    else:
+        try:
+            # We assume the mask was given in number format, eg: 26
+            dmask_ones = Count(bconverter.convert(dmask), "1")
+            diff = int(mask) - dmask_ones
+            result = 2**diff
+        except ValueError:
+            return print(c.fcolors.RED+"That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"+c.fcolors.RESET)
+    return result
+
+
+def GetNetAddress(ip, mask):
+    ip_list = bconverter.convert(ip).split('.')
+    ip_str = ''.join(ip_list)
+    if bconverter.check(mask):
+        mask_list = bconverter.convert(mask).split('.')
+        mask_str = ''.join(mask_list)
+    else:
+        # We assume the mask was given in number format, eg: 26
+        mask = int(mask)
+        ZeroesDiffTotalMask = 32 - mask # So we know how much zeroes we must write after the ones.
+        mask_str = ""
+
+        for i in range(mask):
+            mask_str += "1"
+        for i in range(ZeroesDiffTotalMask):
+            mask_str += "0"
+
+        # Perform an 'AND' operation
+        count = 0
+        and_operation = []
+        for i in range(0, 32):
+            if ip_str[i] == "1" and mask_str[i] == "1":
+                and_operation.append("1")
+            else:
+                and_operation.append("0")
+
+        count = 0
+        cbyte = []
+        result_bin = []
+        for i in and_operation:
+            if count == 7:
+                cbyte.append(i)
+                cbyte = ''.join(cbyte)
+                result_bin.append(cbyte)
+                count = 0
+                cbyte = []
+            else:
+                cbyte.append(i)
+                count += 1
+        ip_bin = '.'.join(result_bin)
+
+        result = bconverter.convert(ip_bin, "binary")
+        return result
