@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+# -*- UTF-8 -*-
+
 # Copyright (C) 2017 ArenGamerZ
 
 import sys, re

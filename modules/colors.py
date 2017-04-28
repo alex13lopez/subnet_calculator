@@ -1,3 +1,6 @@
+# -*- UTF-8 -*-
+
+
 # Font colors:
 class fcolors:
     CYAN = '\033[96m'

@@ -1,3 +1,4 @@
+# -*- UTF-8 -*-
 #!/usr/bin/env python3
 
 # License GNU GPL, check out the full notice in LICENSE file
