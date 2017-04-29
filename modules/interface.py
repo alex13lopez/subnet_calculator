@@ -25,8 +25,6 @@ commands = {}
 def Simple(*uflags):
 
     # As the name of the function suggests, it's a simple interface with prints
-    if ip_bin:
-        print("IP in binary: "+str(ip_bin))
     if ip_class:
         print("Class: "+str(ip_class[0]))
     if Nhosts:
@@ -37,9 +35,11 @@ def Simple(*uflags):
         print("Net Address: "+str(NetAdd))
     if BcastAdd:
         print("Bcast Address: "+str(BcastAdd))
+    if ip_bin:
+        print("IP in binary: "+str(ip_bin))
     if Csubnets:
         for i in range(len(Csubnets-1)):
-            print(i+") "+Csubnets[0]+" - "+Csubnets[1])
+            print(i+1+") "+Csubnets[0]+" - "+Csubnets[1])
 
 
 def Main(ip, mask, iface, *uflags):
@@ -64,7 +64,7 @@ def Main(ip, mask, iface, *uflags):
         if flags[flag] == True:
             globals()[flag] = commands[flag]
 
-    # We call the iface indicated
+    # We call the interface indicated
     if iface == "simple":
         Simple(uflags)
     elif iface == "table":

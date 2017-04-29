@@ -1,0 +1,5 @@
+1. Add a subnet calculator in subnetting.py
+
+2. Research about Exceptions and add NipNnError to bin_converter. Once done, let the respective interfaces do the "print" jobs, modules shouldn't print anything.
+
+3. Investigate about doing a table and do it
