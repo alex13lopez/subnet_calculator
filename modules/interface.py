@@ -17,11 +17,9 @@ Nhosts = None
 Nsubnets = None
 NetAdd = None
 BcastAdd = None
-flags = {}
-commands = {}
 ##########################################################
 
-def Simple(*uflags):
+def Simple():
 
     # As the name of the function suggests, it's a simple interface with prints
     if ip_class:
@@ -38,31 +36,23 @@ def Simple(*uflags):
         print("IP in binary: "+str(ip_bin))
 
 
-def Main(ip, mask, iface, *uflags):
+def Main(ip, mask, iface, *flags):
 
     ######## Global Vars ########
     globals()[ip] = ip
     globals()[mask] = mask
     #############################
 
-    ####################################################### FLAGS ####################################################################################
-    flags = {"ip_bin": False, "ip_class": False, "Nhosts": False, "Nsubnets": False, "NetAdd": False, "BcastAdd": False}
-    commands = {"ip_bin": bconverter.convert(ip), "ip_class": s.DetClass(ip), "Nhosts": s.NumOfHosts(mask), "Nsubnets": s.NumOfSubnets(ip, mask),
+    values = {"ip_bin": bconverter.convert(ip), "ip_class": s.DetClass(ip), "Nhosts": s.NumOfHosts(mask), "Nsubnets": s.NumOfSubnets(ip, mask),
                 "NetAdd": s.GetNetAddress(ip, mask), "BcastAdd": s.GetBcastAddress(ip, mask)}
-    ##################################################################################################################################################
-
-    # We set to True the flags that the user indicated
-    for flag in uflags:
-        flags[flag] = True
 
     # We change the value of the vars on the fly
     for flag in flags:
-        if flags[flag] == True:
-            globals()[flag] = commands[flag]
+        globals()[flag] = values[flag]
 
     # We call the interface indicated
     if iface == "simple":
-        Simple(uflags)
+        Simple()
     elif iface == "table":
         # In development
         pass

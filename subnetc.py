@@ -5,7 +5,7 @@
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 0.5-alpha
+# Version: 0.6-alpha
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
