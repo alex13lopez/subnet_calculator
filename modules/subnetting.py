@@ -5,7 +5,6 @@
 # Copyright (C) 2017 ArenGamerZ
 
 import sys
-from . import colors as c
 from . import bin_converter as bconverter
 
 
@@ -62,13 +61,13 @@ def NumOfHosts(mask):
         NumOfZeroesMask = Count(bconverter.convert(mask), "0")
         result = 2**NumOfZeroesMask-2
     else:
-        try:
-            # We assume the mask was given in number format, eg: 26
-            # 32 is the maximum number of ones with 4 bytes (because 8*4 = 32)
+        # We assume the mask was given in number format, eg: 26
+        # 32 is the maximum number of ones with 4 bytes (because 8*4 = 32)
+        if int(mask) > 31:
+            raise ValueError
+        else:
             NumOfZeroesMask = 32 - int(mask)
             result = 2**NumOfZeroesMask-2
-        except ValueError:
-            return print(c.fcolors.RED+"That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"+c.fcolors.RESET)
     return result
 
 
@@ -78,13 +77,13 @@ def NumOfSubnets(ip, mask):
         diff = Count(bconverter.convert(mask), "1") - Count(bconverter.convert(dmask), "1")
         result = 2**diff
     else:
-        try:
-            # We assume the mask was given in number format, eg: 26
+        # We assume the mask was given in number format, eg: 26
+        if int(mask) > 31:
+            raise ValueError
+        else:
             dmask_ones = Count(bconverter.convert(dmask), "1")
             diff = int(mask) - dmask_ones
             result = 2**diff
-        except ValueError:
-            return print(c.fcolors.RED+"That wasn't a valid mask. You must supply the mask in number format (26) or in IP format (255.255.255.192)"+c.fcolors.RESET)
     return result
 
 
@@ -151,8 +150,7 @@ def GetBcastAddress(ip, mask):
             mask_str += "0"
 
     # Perform an 'IP OR NOT MASK' operation
-    # NOT MASK:
-    mask_str = mask_str.replace("1", "%temp%").replace("0", "1").replace("%temp%", "0")
+    mask_str = mask_str.replace("1", "%temp%").replace("0", "1").replace("%temp%", "0") # NOT MASK
     count = 0
     and_operation = []
     for i in range(0, 32):

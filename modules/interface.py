@@ -17,7 +17,6 @@ Nhosts = None
 Nsubnets = None
 NetAdd = None
 BcastAdd = None
-Csubnets = None
 flags = {}
 commands = {}
 ##########################################################
@@ -37,9 +36,6 @@ def Simple(*uflags):
         print("Bcast Address: "+str(BcastAdd))
     if ip_bin:
         print("IP in binary: "+str(ip_bin))
-    if Csubnets:
-        for i in range(len(Csubnets-1)):
-            print(i+1+") "+Csubnets[0]+" - "+Csubnets[1])
 
 
 def Main(ip, mask, iface, *uflags):
@@ -50,9 +46,9 @@ def Main(ip, mask, iface, *uflags):
     #############################
 
     ####################################################### FLAGS ####################################################################################
-    flags = {"ip_bin": False, "ip_class": False, "Nhosts": False, "Nsubnets": False, "NetAdd": False, "BcastAdd": False, "Csubnets": False}
+    flags = {"ip_bin": False, "ip_class": False, "Nhosts": False, "Nsubnets": False, "NetAdd": False, "BcastAdd": False}
     commands = {"ip_bin": bconverter.convert(ip), "ip_class": s.DetClass(ip), "Nhosts": s.NumOfHosts(mask), "Nsubnets": s.NumOfSubnets(ip, mask),
-                "NetAdd": s.GetNetAddress(ip, mask), "BcastAdd": s.GetBcastAddress(ip, mask), "Csubnets": None}
+                "NetAdd": s.GetNetAddress(ip, mask), "BcastAdd": s.GetBcastAddress(ip, mask)}
     ##################################################################################################################################################
 
     # We set to True the flags that the user indicated
