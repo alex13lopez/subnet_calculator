@@ -5,7 +5,7 @@
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 0.7.2-alpha
+# Version: 1.0-beta
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
@@ -28,7 +28,6 @@ BcastAdd = None
 
 if __name__ != "__main__":
     print(c.fcolors.RED+"This module is meant to be executed not imported!!!"+c.fcolors.RESET)
-    exit(1)
 else:
     try:
         parser = argparse.ArgumentParser(description=" It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast add from the given IP and MASK")

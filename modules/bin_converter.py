@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+# This is a library of my other project binary_converter,
+# you can see the full project here: https://ArenGamerZ@bitbucket.org/ArenGamerZ/binary_converter.git
+
 # Copyright (C) 2017 ArenGamerZ
 
 import sys, re

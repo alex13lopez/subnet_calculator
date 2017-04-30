@@ -60,5 +60,5 @@ def Main(ip, mask, iface, *flags):
     if iface == "simple":
         Simple()
     elif iface == "table":
-        # In development
+        # Abandoned at the moment, seems rather complicated and tedious to do
         pass

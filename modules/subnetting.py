@@ -56,6 +56,9 @@ def DetClass(ip):
 
 
 def NumOfHosts(mask):
+    """ This function calculates the number of hosts per subnet with the given mask """
+
+    # If mask is an IP
     if bconverter.check(mask):
         NumOfZeroesMask = Count(bconverter.convert(mask), "0")
         result = 2**NumOfZeroesMask-2
@@ -71,8 +74,12 @@ def NumOfHosts(mask):
 
 
 def NumOfSubnets(ip, mask):
+    """ This function calculates the number of subnets with the given ip and mask.
+        In this case, we need the IP since we need to know it's default mask to compare to the new one. """
+
     dmask = DetClass(ip)[1]
     if bconverter.check(mask):
+        # We get the difference of number of ones in the new mask
         diff = Count(bconverter.convert(mask), "1") - Count(bconverter.convert(dmask), "1")
         result = 2**diff
     else:
@@ -87,6 +94,8 @@ def NumOfSubnets(ip, mask):
 
 
 def GetNetAddress(ip, mask):
+    """ This function gets the network address within the subnet of the given IP. """
+
     ip_list = bconverter.convert(ip).split('.')
     ip_str = ''.join(ip_list)
     if bconverter.check(mask):
@@ -112,6 +121,7 @@ def GetNetAddress(ip, mask):
         else:
             and_operation.append("0")
 
+    # Here we separate the binary string in 4 bytes so we can get the decimal representation of the IP
     count = 0
     cbyte = []
     result_bin = []
@@ -127,11 +137,14 @@ def GetNetAddress(ip, mask):
             count += 1
     ip_bin = '.'.join(result_bin)
 
+    # We translate the IP in binary format to its decimal representation
     result = bconverter.convert(ip_bin, "binary")
     return result
 
 
 def GetBcastAddress(ip, mask):
+    """ This function gets the broadcast address within the subnet of the given IP. """
+
     ip_list = bconverter.convert(ip).split('.')
     ip_str = ''.join(ip_list)
     if bconverter.check(mask):
