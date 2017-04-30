@@ -4,6 +4,7 @@
 # Font colors:
 class fcolors:
     CYAN = '\033[96m'
+    MAGENTA = '\033[95m'
     GREY = '\033[94m'
     GREEN = '\033[92m'
     YELLOW = '\033[93m'

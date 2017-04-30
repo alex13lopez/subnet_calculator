@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-# -*- UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 ################################################################################################################################################
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 0.6-alpha
+# Version: 0.7.2-alpha
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
@@ -32,41 +32,53 @@ if __name__ != "__main__":
 else:
     try:
         parser = argparse.ArgumentParser(description=" It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast add from the given IP and MASK")
-        parser.add_argument("-a", "--all", action="store_true", help="Activates all the flags")
-        parser.add_argument("-b", "--ip_bin", action="store_true", help="Get the IP in binary representation")
-        parser.add_argument("-c", "--class", dest="ip_class",action="store_true", help="Get the class of the given IP")
+        parser.add_argument("-a", "--all", dest="ALL", action="store_true", help="Activates all the flags")
+        parser.add_argument("-b", "--ip_bin", action="store_true", help="Shows the IP in binary representation")
+        parser.add_argument("-C", "--class", dest="ip_class",action="store_true", help="Get the class of the given IP")
         parser.add_argument("-H", "--nhosts", dest="Nhosts", action="store_true", help="Get the number of hosts")
         parser.add_argument("-S", "--nsubnets", dest="Nsubnets", action="store_true", help="Get the number of subnets")
         parser.add_argument("-A", "--netadd", dest="NetAdd", action="store_true", help="Get the network address of the given IP")
         parser.add_argument("-B", "--bcast", dest="BcastAdd", action="store_true", help="Get the broadcast address of the given IP")
-        parser.add_argument("-o", "--output", dest="FILE", help="Saves the output into <FILE>")
-        parser.add_argument("-p", "--print", action="store_true", help="Prints to stdout in addition to outputting to file")
-        parser.add_argument("IP", type=str, help="IP Address")
-        parser.add_argument("MASK", type=str, help="MASK Address")
+        parser.add_argument("-i", "--input", dest="IFILE", help="Takes the input of <IFILE> instead of stdin. The file must have the form of IP/MASK per line like stdin")
+        parser.add_argument("-o", "--output", dest="OFILE", help="Saves the output into <OFILE>")
+        parser.add_argument("-p", "--print", dest="PRINT", action="store_true", help="Prints to stdout in addition to outputting to file")
+        parser.add_argument("IP/MASK", type=str, nargs="?", help="IP Address/Mask")
         args = parser.parse_args()
 
         opts = vars(args)
-        if opts["all"] == True:
+        if opts["ALL"] == True:
             for opt in opts:
-                if opt not in ("all", "IP", "MASK", "FILE", "print"):
+                if opt not in ("ALL", "IP/MASK", "IFILE", "OFILE", "PRINT"):
                     opts[opt] = True
 
 
         flags = []
         for opt in opts:
-            if opts[opt] == True and opt not in ("all", "IP", "MASK", "FILE", "print"):
+            if opts[opt] == True and opt not in ("ALL", "IP/MASK", "IFILE", "OFILE", "PRINT"):
                 flags.append(opt)
 
 
-        if opts["FILE"]:
-            sys.stdout = open(opts["FILE"], "w")
+        if opts["OFILE"]:
+            sys.stdout = open(opts["OFILE"], "w")
 
-        interface.Main(opts["IP"], opts["MASK"], "simple", *flags)
+        if opts["IFILE"]:
+            with open(opts["IFILE"], "r") as lines:
+                for line in lines:
+                    line = line[:-1] # To remove the trailing newline character
+                    ip, mask = line.split("/")
+                    interface.Main(ip, mask, "simple", *flags)
+        else:
+            ip, mask = opts["IP/MASK"].split("/")
+            interface.Main(ip, mask, "simple", *flags)
 
-        if opts["FILE"] and opts["print"] == True:
+        if opts["OFILE"] and opts["PRINT"] == True:
             sys.stdout = sys.__stdout__
-            file_saved = open(opts["FILE"], "r")
+            file_saved = open(opts["OFILE"], "r")
             print(file_saved.read(), end='')
             file_saved.close()
+
+
     except (ValueError, IndexError):
         print(c.fcolors.RED+"The IP or the MASK are not valid")
+    except TypeError:
+        print(c.fcolors.RED+"No argument supplied! Try '-h' to see available arguments!")

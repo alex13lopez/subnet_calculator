@@ -1,5 +1,4 @@
-# -*- UTF-8 -*-
-#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 # License GNU GPL, check out the full notice in LICENSE file
 # Copyright (C) 2017 ArenGamerZ

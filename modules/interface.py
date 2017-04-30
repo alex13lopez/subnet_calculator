@@ -1,16 +1,17 @@
-# -*- UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 
 # License GNU GPL, check out the full notice in LICENSE file
 # Copyright (C) 2017 ArenGamerZ
 
 import sys
+from . import colors as c
 from . import subnetting as s
 from . import bin_converter as bconverter
 
 ########## INITIALIZING NECESSARY VARS ###################
-ip = None
-mask = None
+IP = None
+MASK = None
 ip_bin = None
 ip_class = None
 Nhosts = None
@@ -22,26 +23,31 @@ BcastAdd = None
 def Simple():
 
     # As the name of the function suggests, it's a simple interface with prints
+    print("")
+    if ip and mask:
+        print(c.fcolors.MAGENTA+"IP: "+c.fcolors.CYAN+str(ip)+"/"+str(mask)+c.fcolors.RESET)
     if ip_class:
-        print("Class: "+str(ip_class[0]))
+        print(c.fcolors.MAGENTA+"   - Class: "+c.fcolors.CYAN+str(ip_class[0])+c.fcolors.RESET)
     if Nhosts:
-        print("Nº of Hosts: "+str(Nhosts))
+        print(c.fcolors.MAGENTA+"   - Nº of Hosts: "+c.fcolors.CYAN+str(Nhosts)+c.fcolors.RESET)
     if Nsubnets:
-        print("Nº of Subnets: "+str(Nsubnets))
+        print(c.fcolors.MAGENTA+"   - Nº of Subnets: "+c.fcolors.CYAN+str(Nsubnets)+c.fcolors.RESET)
     if NetAdd:
-        print("Net Address: "+str(NetAdd))
+        print(c.fcolors.MAGENTA+"   - Net Address: "+c.fcolors.CYAN+str(NetAdd)+c.fcolors.RESET)
     if BcastAdd:
-        print("Bcast Address: "+str(BcastAdd))
+        print(c.fcolors.MAGENTA+"   - Bcast Address: "+c.fcolors.CYAN+str(BcastAdd)+c.fcolors.RESET)
     if ip_bin:
-        print("IP in binary: "+str(ip_bin))
+        print(c.fcolors.MAGENTA+"   - IP in binary: "+c.fcolors.CYAN+str(ip_bin)+c.fcolors.RESET)
+    print("")
 
 
 def Main(ip, mask, iface, *flags):
 
-    ######## Global Vars ########
-    globals()[ip] = ip
-    globals()[mask] = mask
-    #############################
+    if not flags:
+        raise TypeError # We raise the Type error because no flag was supplied, so no job can be done
+
+    globals()["ip"] = ip
+    globals()["mask"] = mask
 
     values = {"ip_bin": bconverter.convert(ip), "ip_class": s.DetClass(ip), "Nhosts": s.NumOfHosts(mask), "Nsubnets": s.NumOfSubnets(ip, mask),
                 "NetAdd": s.GetNetAddress(ip, mask), "BcastAdd": s.GetBcastAddress(ip, mask)}
