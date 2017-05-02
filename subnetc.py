@@ -5,7 +5,7 @@
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 1.0.1-beta
+# Version: 1.0.2-beta
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
@@ -79,5 +79,5 @@ else:
 
     except (ValueError, IndexError):
         print(c.fcolors.RED+"The IP or the MASK are not valid")
-    except AttributeError:
+    except (TypeError, AttributeError):
         print(c.fcolors.RED+"No argument supplied! Try '-h' to see available arguments!")
