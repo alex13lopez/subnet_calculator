@@ -5,7 +5,7 @@
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 1.0.2-beta
+# Version: 1.0.2.1-beta
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
@@ -31,7 +31,7 @@ if __name__ != "__main__":
 else:
     try:
         parser = argparse.ArgumentParser(description=" It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast add from the given IP and MASK")
-        parser.add_argument("-a", "--all", dest="ALL", action="store_true", help="Activates all the flags")
+        parser.add_argument("-a", "--all", dest="ALL", action="store_true", help="Activates all the flags, except for ip_bin")
         parser.add_argument("-b", "--ip_bin", action="store_true", help="Shows the IP in binary representation")
         parser.add_argument("-C", "--class", dest="ip_class",action="store_true", help="Get the class of the given IP")
         parser.add_argument("-H", "--nhosts", dest="Nhosts", action="store_true", help="Get the number of hosts")
@@ -47,7 +47,7 @@ else:
         opts = vars(args)
         if opts["ALL"] == True:
             for opt in opts:
-                if opt not in ("ALL", "IP/MASK", "IFILE", "OFILE", "PRINT"):
+                if opt not in ("ALL", "ip_bin", "IP/MASK", "IFILE", "OFILE", "PRINT"):
                     opts[opt] = True
 
 
