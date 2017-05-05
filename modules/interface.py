@@ -25,17 +25,17 @@ def Simple():
     # As the name of the function suggests, it's a simple interface with prints
     print("")
     if ip and mask:
-        print(c.fcolors.MAGENTA+"IP: "+c.fcolors.CYAN+str(ip)+"/"+str(mask)+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"IP: "+c.fcolors.CYAN+str(ip)+"/"+str(mask))
     if ip_class:
-        print(c.fcolors.MAGENTA+"   - Class: "+c.fcolors.CYAN+str(ip_class[0])+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"   - Class: "+c.fcolors.CYAN+str(ip_class[0]))
     if Nhosts:
-        print(c.fcolors.MAGENTA+"   - Nº of Hosts: "+c.fcolors.CYAN+str(Nhosts)+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"   - Number of Hosts: "+c.fcolors.CYAN+str(Nhosts))
     if Nsubnets:
-        print(c.fcolors.MAGENTA+"   - Nº of Subnets: "+c.fcolors.CYAN+str(Nsubnets)+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"   - Number of Subnets: "+c.fcolors.CYAN+str(Nsubnets))
     if NetAdd:
-        print(c.fcolors.MAGENTA+"   - Net Address: "+c.fcolors.CYAN+str(NetAdd)+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"   - Net Address: "+c.fcolors.CYAN+str(NetAdd))
     if BcastAdd:
-        print(c.fcolors.MAGENTA+"   - Bcast Address: "+c.fcolors.CYAN+str(BcastAdd)+c.fcolors.RESET)
+        print(c.fcolors.MAGENTA+"   - Bcast Address: "+c.fcolors.CYAN+str(BcastAdd))
     if ip_bin:
         print(c.fcolors.MAGENTA+"   - IP in binary: "+c.fcolors.CYAN+str(ip_bin)+c.fcolors.RESET)
     print("")
