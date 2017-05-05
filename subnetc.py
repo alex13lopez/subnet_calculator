@@ -5,17 +5,25 @@
 # Name: Subnet_Calculator
 # Author: ArenGamerZ
 # Email: arendevel@gmail.com
-# Version: 1.1-beta
+# Version: 1.2-beta
 # Description: It's a tool that calculates the number of hosts, number of subnets, the network address, the broadcast address
 #              from the given IP and MASK
 # License GNU GPL, check out the full notice in LICENSE file
 # Copyright (C) 2017 ArenGamerZ
 ################################################################################################################################################
 
-import sys, argparse
-from modules import interface
-from modules import colors as c
 
+try:
+    import sys, argparse, colorama
+    from modules import interface
+    from modules import colors as c
+
+except ModuleNotFoundError:
+    print("Fatal Error: Make sure you meet all the requirements")
+    exit(1)
+
+finally:
+    colorama.init()
 
 ######### INITIALIZING VARS #########
 ip_bin = None
