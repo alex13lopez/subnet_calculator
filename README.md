@@ -21,7 +21,10 @@ directly into files or load several IP/MASK from a file.
 # **REQUIREMENTS** #
 
 * Python 3.6.1 or greater
-* Colorama 0.3.9 or greater (You can install it with 'pip install colorama')
+* Colorama 0.3.9 or greater (You can install it with 'python3 -m pip install colorama') # Do not use sudo (Linux users), otherwise you might have permission problems
+    * If you have problems with 'pip' in 'Linux' try:
+        * sudo find /usr/local/lib/python* -type f -exec chmod 666 "{}" \;
+        * sudo find /usr/local/lib/python* -type d -exec chmod 777 "{}" \;
 
 
 # **DOCUMENTATION** #
