@@ -1,6 +1,6 @@
 # **LICENSE** #
 
-**Author:** ArenGamerZ <arendevel@gmail.com>
+**Author:** ArenGamerZ <arendevel@gmail.com\>
 
 This project is licensed over the GNU GPLv3 license.  
 Copyright (C) 2017 ArenGamerZ
