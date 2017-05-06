@@ -26,7 +26,7 @@ directly into files or load several IP/MASK from a file.
 
 # **DOCUMENTATION** #
 
-* ***Main file:*** **subnetc.py** - This is the file meant to be executed.
+* **subnetc.py** - This is the file meant to be executed.
 * **example_file.txt** - This is an example file containing to IP/MASK addresses, to show how to load IP/MASK pairs from a file.
 * ***Modules:***
     * **modules/bin_converter.py**  - This is a Library from my other project called binary_converter, you can see the full project here: https://ArenGamerZ@bitbucket.org/ArenGamerZ/binary_converter.git
