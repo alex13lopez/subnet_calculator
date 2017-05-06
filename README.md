@@ -1,12 +1,12 @@
 # **LICENSE** #
 
-Author: ArenGamerZ <arendevel@gmail.com>
+**Author:** ArenGamerZ <arendevel@gmail.com>
 
 This project is licensed over the GNU GPLv3 license.  
 Copyright (C) 2017 ArenGamerZ
 
 
-Brief license summary: It's a copyleft license so you may copy, modify and redistribute the code but the derived work MUST be licensed the same way as the original.
+**Brief license summary:** It's a copyleft license so you may copy, modify and redistribute the code but the derived work MUST be licensed the same way as the original.
                        In addition you MUST reproduce the above copyright notice in all the files of the derived work and if the derived work has a user interface,
                        when this user interface enters in interactive mode, it MUST reproduce the same copyright notice.
                        For further information of what are you allowed and what you are not allowed to do, read the full LICENSE file.
