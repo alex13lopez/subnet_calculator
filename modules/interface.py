@@ -44,7 +44,7 @@ def Simple():
 def Main(ip, mask, iface, *flags):
 
     if not flags:
-        raise TypeError # We raise the Type error because no flag was supplied, so no job can be done
+        raise AttributeError # We raise the AttributeError because no flag was supplied, so no job can be done
 
     globals()["ip"] = ip
     globals()["mask"] = mask

@@ -15,6 +15,23 @@ def Count(string, character):
             count += 1
     return count
 
+def Separate(string):
+    # Here we separate the binary string in 4 bytes so we can get the decimal representation of the IP
+    count = 0
+    cbyte = []
+    result = []
+    for i in string:
+        if count == 7:
+            cbyte.append(i)
+            cbyte = ''.join(cbyte)
+            result.append(cbyte)
+            count = 0
+            cbyte = []
+        else:
+            cbyte.append(i)
+            count += 1
+    return result
+
 
 def DetClass(ip):
     """ This function determines whether the ip is class A, B, C, D or E
@@ -121,21 +138,7 @@ def GetNetAddress(ip, mask):
         else:
             and_operation.append("0")
 
-    # Here we separate the binary string in 4 bytes so we can get the decimal representation of the IP
-    count = 0
-    cbyte = []
-    result_bin = []
-    for i in and_operation:
-        if count == 7:
-            cbyte.append(i)
-            cbyte = ''.join(cbyte)
-            result_bin.append(cbyte)
-            count = 0
-            cbyte = []
-        else:
-            cbyte.append(i)
-            count += 1
-    ip_bin = '.'.join(result_bin)
+    ip_bin = '.'.join(Separate(and_operation))
 
     # We translate the IP in binary format to its decimal representation
     result = bconverter.convert(ip_bin, "binary")
@@ -164,27 +167,14 @@ def GetBcastAddress(ip, mask):
     # Perform an 'IP OR NOT MASK' operation
     mask_str = mask_str.replace("1", "%temp%").replace("0", "1").replace("%temp%", "0") # NOT MASK
     count = 0
-    and_operation = []
+    or_operation = []
     for i in range(0, 32):
         if ip_str[i] == "1" or mask_str[i] == "1":
-            and_operation.append("1")
+            or_operation.append("1")
         else:
-            and_operation.append("0")
+            or_operation.append("0")
 
-    count = 0
-    cbyte = []
-    result_bin = []
-    for i in and_operation:
-        if count == 7:
-            cbyte.append(i)
-            cbyte = ''.join(cbyte)
-            result_bin.append(cbyte)
-            count = 0
-            cbyte = []
-        else:
-            cbyte.append(i)
-            count += 1
-    ip_bin = '.'.join(result_bin)
+    ip_bin = '.'.join(Separate(or_operation))
 
     result = bconverter.convert(ip_bin, "binary")
     return result
